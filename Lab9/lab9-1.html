@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script type="text/javascript" src="scripts/validate.js"></script>
+
+<!-- Password checking script here!! -->
+<script>
+// 
+function checkPasswordMatch(e){
+	var psw1 = document.getElementById('password');
+	var psw2 = document.getElementById('password-check');
+	
+	// if not match, use the makeRed() function
+	// to highlight the field and 
+	// use an alert to let the user know that the passwords do not match
+	if (psw1.value != psw2.value){
+		makeRed(psw1);
+		makeRed(psw2);
+		
+		alert('passwords do not match!');
+		e.preventDefault();
+	}else{
+		// Once the passwords match, allow the submission of the form
+		makeClean(psw1);
+		makeClean(psw2);
+	}	
+}
+
+</script>
+
+</head>
+
+<body>
+
+<form method="post" action="newuser.php" id="mainForm" >
+  First Name:<br>
+  <input type="text" name="firstname" id="firstname" class="required">
+  <br>
+  Last Name:<br>
+  <input type="text" name="lastname" id="lastname" class="required">
+  <br>
+  Username:<br>
+  <input type="text" name="username" id="username" class="required">
+  <br>
+  email:<br>
+  <input type="text" name="email" id="email" class="required">
+  <br>
+  Password:<br>
+  <input type="password" name="password" id="password" class="required">
+  <br>
+  Re-enter Password:<br>
+  <input type="password" name="password-check" id="password-check" class="required">
+  <br><br>
+  <input type="submit" value="Create New User" >
+</form>
+</body>
