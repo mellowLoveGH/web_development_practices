@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<style>
+		.button {
+		  border: none;
+		  color: white;
+		  padding: 15px 32px;
+		  text-align: center;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 16px;
+		  margin: 4px 2px;
+		  cursor: pointer;
+		}
+
+		.button1 {background-color: #008CBA;} /* Blue */
+		
+		table {
+		  font-family: arial, sans-serif;
+		  border-collapse: collapse;
+		  width: 100%;
+		}
+		
+		td, th {
+		  border: 1px solid #dddddd;
+		  text-align: left;
+		  padding: 8px;
+		}
+		
+		tr:nth-child(even) {
+		  background-color: #dddddd;
+		}
+	</style>
+</head>
+<body>
+  <p>A script on this page starts this clock:</p>
+
+  <p id="time_one"></p>
+
+  <p id="time_two"></p>
+
+  <!-- Add button and table here -->
+	<button class="button button1" id="city_info">Get City Info</button>
+	<table id="myTable">
+		
+		
+	</table>
+	
+  <script>
+  //set interval timers to trigger the refresh.  Here the callback function will
+  //be called when the timer fires
+  var var1 = setInterval(timer1, 1000);
+  var var2 = setInterval(timer2, 1000);
+
+  //this is the callback function that will be run when timer1 runs.  Just pulls local time
+  function timer1() {
+      var d = new Date();
+      //Vanilla JS
+      //document.getElementById("time_one").innerHTML = d.toLocaleTimeString();
+      //jQuery
+      $("#time_one").html("From local system: " + d.toLocaleTimeString());
+  }
+
+  //this is the callback function that will be run when timer2 runs.
+  //This will contact the server at the specified url and wait for the data
+  //In this case time.jsontest.com just sends the time back as JSON but you could
+  //use this to pull data from a database or other data source.
+  function timer2() {
+      var results = $.get("http://time.jsontest.com/");
+      results.done(function(data) {
+                            console.log(data);
+                            //Vanilla JS
+                            //document.getElementById("time_two").innerHTML = data.time;
+                            //jQuery
+                            $("#time_two").html("Remote server time: " + data.time);
+                              });
+      results.fail(function(jqXHR) {console.log("Error: " + jqXHR.status);});
+      results.always(function() {console.log("done");});
+  }
+  
+	//Vanilla JS
+	/*
+	var btn = document.getElementById("city_info");
+	btn.addEventListener('click', function(e) {
+		// these two lines are used for testing
+		var d = new Date();
+		alert("You clicked this on "+ d.toString());
+		// ...
+	});
+	*/
+	
+	//jQuery
+	$("#city_info").click(function(e){
+			cityInfo();			
+	});
+	
+	function cityInfo(){
+		// get the data
+		var results = $.get("http://www.randyconnolly.com/funwebdev/services/travel/cities.php");
+		results.done(function(data) {
+					//if successful, the returned data is a list, including some JSON-type elements.
+					// every element is JSON type with 7 attributes
+					// such as:
+					/*
+						{
+							"id":"",
+							"name":"Accra",
+							"iso":"GH",
+							"latitude":"5.55602",
+							"longitude":"-0.1969",
+							"population":"1963264",
+							"elevation":"91"
+						}
+					*/
+						var len = data.length;
+						// every one element is a row in the table
+						
+						// add table head
+						$('#myTable').append( tableHead() );
+						// add every row
+						for(var i = 0; i<len; i++){
+							var row = generateRow(data, i);
+							$('#myTable').append( row );
+							console.log( row );
+						}
+							  });
+		results.fail(function(jqXHR) {
+						// print out error msg on console
+						console.log("Error: " + jqXHR.status);
+						
+						// add table head
+						$('#myTable').append( tableHead() );
+						$('#myTable').append( errorMsg() );
+						//console.log( errorMsg() );
+						});
+		results.always(function() { console.log("city info done");} );
+	}
+	
+	// get the table head that includes 7 attribues.
+	function tableHead(){
+		var head = "<tr><th>id</th><th>name</th><th>iso</th><th>latitude</th><th>longitude</th><th>population</th><th>elevation</th></tr>";
+		
+		return head;
+	}
+	
+	// format data for every row
+	function generateRow(data, i){
+		var id = i+1;
+		var name = data[i]['name'];
+		var iso = data[i]['iso'];
+		var latitude = data[i]['latitude'];
+		var longitude = data[i]['longitude'];
+		var population = data[i]['population'];
+		var elevation = data[i]['elevation'];
+		
+		var row = "<tr>"
+		row = row + "<td>" + id + "</td>";
+		row = row + "<td>" + name + "</td>";
+		row = row + "<td>" + iso + "</td>";
+		row = row + "<td>" + latitude + "</td>";
+		row = row + "<td>" + longitude + "</td>";
+		row = row + "<td>" + population + "</td>";
+		row = row + "<td>" + elevation + "</td>";		
+		row = row + "</tr>";
+		return row;
+	}
+	
+	// when there is error, data is not available
+	function errorMsg(){
+		var msg = "Cannot get the data from server: http://www.randyconnolly.com/funwebdev/services/travel/cities.php";
+		var con = "<td colspan='7'>" + msg + "</td>";
+		return con;
+	}
+  </script>
+
+  </body>
+</html>

@@ -1,0 +1,54 @@
+* {box-sizing: border-box;}
+body {font-family: Verdana, sans-serif;}
+
+#table_calendar {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #E6E6FA;
+}
+
+#table_calendar td:hover {background-color: #FF0000;}
+
+#table_calendar td, #table_calendar th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#table_calendar th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #4CAF50;
+  color: white;
+}
+
+#table_calendar caption{
+	padding-top: 12px;
+	padding-bottom: 12px;
+	background-color: #FFB6C1;
+	color: black;
+}
+
+#form_meeting {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #00FFFF;
+}
+
+
+#today{
+	background-color: #EE82EE;
+}
+
+.prevMon{
+	text-align: left;
+}
+
+.nextMon{
+	text-align: right;
+}

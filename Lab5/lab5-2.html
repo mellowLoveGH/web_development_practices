@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>COSC 360 - Lab 3</title>
+	<link rel="stylesheet" href="css/lab3.css" />	
+</head>
+
+<body>
+
+<header>
+<h1>Lab3 Calendar</h1>
+<table id='table_calendar'>
+    <caption><span>February 2021</span></caption>
+	
+    <tr>
+        <th ><span>S</span></th>
+        <th ><span>M</span></th>
+        <th ><span>T</span></th>
+        <th ><span>W</span></th>
+        <th ><span>T</span></th>
+        <th ><span>F</span></th>
+        <th ><span>S</span></th>
+    </tr>
+    <tr>
+        <td></td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+    </tr>
+    <tr>
+        <td><a href='#'> 7 </a></td>
+        <td>8</td>
+        <td>9</td>
+        <td>10</td>
+        <td>11</td>
+        <td>12</td>
+        <td >13</td>
+    </tr>
+    <tr>
+        <td><a href='#'> 14 </a></td>
+        <td id='today'>15</td>
+        <td>16</td>
+        <td >17</td>
+        <td >18</td>
+        <td>19</td>
+        <td>20</td>
+    </tr>
+    <tr>
+        <td><a href='#'> 21 </a></td>
+        <td>22</td>
+        <td>23</td>
+        <td>24</td>
+        <td>25</td>
+        <td >26</td>
+        <td >27</td>
+    </tr>
+    <tr>
+        <td><a href='#'> 28 </a></td>
+        
+    </tr>
+	
+	<tfoot>
+    <tr>
+      <td colspan="3" class='prevMon' > <a href='#' id='prev'> &lt;&lt; January </a> </td>
+	  <td></td>
+      <td colspan="3" class='nextMon'> <a href='#' id='next'> March &gt;&gt; </a> </td>
+    </tr>
+	</tfoot>
+</table>
+
+</header>
+	
+	<form id='form_meeting' action="http://www.randyconnolly.com/tests/process.php" method="get">
+	<!-- 
+		<form action="http://www.randyconnolly.com/tests/process.php" method="post">
+	-->
+	
+		<fieldset>
+			<legend>Meeting Details:</legend>
+
+			<label>Client Name:</label>
+			<input type="text" name="client" placeholder="Enter name"><br><br>
+
+			<label>First Meeting?</label>
+			<input type="checkbox" name="first" value="Yes"><br><br>
+
+			<label>Client Type:</label>
+			<input type="radio" id="male" name="gender" value="male">
+			<label>School</label>
+			<input type="radio" id="female" name="gender" value="female">
+			<label>College</label>
+			<input type="radio" id="other" name="gender" value="other">
+			<label>University</label><br><br>
+
+
+			<label>Meeting Date:</label>
+			<input type="date" id="birthday" name="birthday"><br><br>
+
+			<input type="submit" value="Submit">
+			<input type="reset" value="Reset">
+		</fieldset>
+	</form>
+
+
+<footer>
+  <p> <i>Copyright &copy; 2021 COSC Lab 3</i> <p>
+  <hr/>
+</footer>
+
+</body>
+</html>
